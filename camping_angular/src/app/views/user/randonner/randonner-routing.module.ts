@@ -1,0 +1,11 @@
+import { RandonnerComponent } from './randonner/randonner.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [  {path:'',component:RandonnerComponent}];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class RandonnerRoutingModule { }

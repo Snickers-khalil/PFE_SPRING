@@ -1,0 +1,97 @@
+<section class="breadcumb-area bg-img bg-overlay" style="background-image: url(assets/img/bg-img/pic1.jpg);">
+    <div class="bradcumbContent">
+        <p>See what’s new</p>
+        <h2>Favoris</h2>
+    </div>
+</section>
+<br><br><br><br>
+<br><br><br>
+ <!-- Notification for no employees -->
+ <div *ngIf="favoris.length==0" class="col-lg-12 col-md-12 col-xl-12 ">
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">No Favoris found!</h4>
+        <p style="font-size:medium ;"><a href="/shop">Visit Shop!!</a></p>
+    </div>
+</div>
+<ng-container *ngIf="favoris.length!=0">
+    <div class="container">
+        <div class="card-table">
+            <div class="cart-product">
+                <table class="table table-striped">
+                    <tr>                      
+                        <th>Product Name</th>
+                        <th>Product Image</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                    <tbody>
+                        <tr *ngFor="let item of favoris" >
+                            <td style="font-size: medium;">{{item?.annonce.titre}}</td>
+                            <td style="font-size: medium;">
+                            <img style="width:100px; height: 100px;" src="data:image/png;base64,{{item.annonce.imageUrl}}" alt="{{item?.annonce.titre}}"></td>
+                            <td style="font-size: medium;">{{item.annonce.description}}</td>
+                            <td style="font-size: medium;" class="event-date">{{item?.date_fav|date:'dd/MM/yyyy'}}</td>
+                            <td>
+                                <button (click)="removeFav(item?.id)" class="btn btn-danger">Delete<i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"></td>
+                            <td><button routerLink="/shop" class="btn btn-primary">Shop</button></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<!-- <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(assets/img/bg-img/pic1.jpg);">
+    <div class="bradcumbContent">
+        <p>See what’s new</p>
+        <h2>Favoris</h2>
+    </div>
+</section>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<ng-container>
+    <div class="container">
+        <div class="card-table">
+            <div class="cart-product">
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Product Name</th>
+                            <th>Product Image</th>
+                            <th>Description</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of favoris">
+                            <td>{{item?.id}}</td>
+                            <td>{{item?.annonce.titre}}</td>
+                            <td><img style="width: 120px; height: 120px;" src="data:image/png;base64,{{item.annonce.imageUrl}}" alt="{{item?.annonce.titre}}"></td>
+                            <td style="width: 25%;">{{item.annonce.description}}</td>
+                            <td>{{item?.date_fav}}</td>
+                            <td>
+                                <button (click)="removeFav(item?.id)" class="btn btn-danger">Delete<i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"></td>
+                            <td><button routerLink="/shop" class="btn btn-primary">Shop</button></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->

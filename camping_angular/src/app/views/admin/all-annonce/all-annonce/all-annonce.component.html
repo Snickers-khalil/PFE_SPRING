@@ -1,0 +1,279 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" (click)="onOpenModal(null!, 'add')">Add Annonce <span class="sr-only">(current)</span></a>
+            </li>
+            <form class="form-inline my-2 my-lg-0">
+                <input type="search" (ngModelChange)="searchEmployees(key.value)" #key="ngModel" ngModel name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search employees..." required>
+            </form>
+        </ul>
+    </div>
+</nav>
+<div class="container" id="main-container">
+    <div class="row">
+        <div *ngFor="let Annonce of annonces" class="col-md-6 col-xl-3">
+            <div class="card m-b-30">
+                <div class="card-body row">
+                    <div class="col-6">
+                        <a (click)="onOpenModal(annonce, 'details')" class="btn see-more-btn"><img src="data:image/png;base64,{{Annonce?.imageUrl}}" alt="" class="img-fluid rounded-circle w-60"></a>
+                    </div>
+                    <div class="col-6 card-title align-self-center mb-0">
+                        <h5 style="font-size: medium;">{{Annonce?.titre}}</h5>
+                        <p class="m-0"style="font-size: medium;">{{Annonce?.categorie}}</p>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" style="font-size: medium;"><i class="fa fa-envelope float-right"></i>{{Annonce?.description}}</li>
+                    <li class="list-group-item" style="font-size: medium;"><i class="fa fa-phone float-right"></i>Phone : {{Annonce?.date_ajout}}</li>
+                </ul>
+                <div class="card-body">
+                    <div class="float-right btn-group btn-group-sm">
+                        <a (click)="onOpenModal(Annonce, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                        <a (click)="onOpenModal(Annonce, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add Annonce Modal -->
+    <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addEmployeeModalLabel">Add Annonce</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+                </div>
+                <div class="modal-body">
+                    <form #addForm="ngForm" (ngSubmit)="onAddAnnonce(addForm)">
+
+                        <div class="form-group">
+                            <label for="titre">Titre</label>
+                            <input type="text" ngModel name="titre" class="form-control" id="titre" placeholder="titre" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="email" ngModel name="description" class="form-control" id="description" placeholder="description" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="categorie">Categorie</label>
+                            <input type="text" ngModel name="categorie" class="form-control" id="categorie" placeholder="categorie" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="categorie">Adresse</label>
+                            <input type="text" ngModel name="adresse" class="form-control" id="adresse" placeholder="adresse">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="text" ngModel name="phone" class="form-control" id="phone" placeholder="Phone" required>
+                        </div>
+                        <div class="form-group ">
+                            <label for="phone">Prix</label>
+                            <input type="number" ngModel name="prix" class="form-control" id="prix" placeholder="prix" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Photo</label>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1" required name="path" #path="ngModel" ngModel (change)="selectImage($event)" />
+                            <div class="alert alert-danger" *ngIf="path.errors?.required && path.touched">
+                                Photo is required
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+
+                    <!--  Edit Modal<form name="form" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+                    <div class="form-group">
+                        <input type="hidden" name="utilisateur_id" class="form-control" [(ngModel)]="form.utilisateur_id" utilisateur_id #utilisateur_id="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label>titre</label>
+                        <input type="text" name="titre" class="form-control" placeholder="Enter titre" [(ngModel)]="form.titre" required titre #titre="ngModel">
+                    </div>
+                    <div class="form-group ">
+                        <label>description</label>
+                        <input type="text" class="form-control" name="description" placeholder="Enter description" [(ngModel)]="form.description" required description #description="ngModel">
+                    </div>
+                    <div class="form-group ">
+                        <label>date</label>
+                        <input type="date" class="form-control" name="date_ajout" placeholder="Enter date_ajout" [(ngModel)]="form.date_ajout" required date_ajout #date_ajout="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label>Prix</label>
+                        <input type="prix" class="form-control" name="prix" placeholder="prix" [(ngModel)]="form.prix" required prix #prix="ngModel">
+                    </div>
+                    <div class="form-group ">
+                        <label>phone</label>
+                        <input type="text" class="form-control" name="phone" placeholder="Enter Phone" [(ngModel)]="form.phone " required phone #phone="ngModel">
+                    </div>
+                    <div class="form-group ">
+                        <label>Adresse</label>
+                        <input type="text" class="form-control" name="adresse" placeholder="Enter adresse" [(ngModel)]="form.adresse" required adresse #adresse="ngModel">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateEmployeeModalLabel">Edit Annonce {{editAnnonce?.titre}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close ">
+         <span aria-hidden="true">&times;</span>
+         </button>
+                </div>
+                <div class="modal-body ">
+                    <form #editForm="ngForm">
+                        <div class="form-group ">
+                            <label for="titre">Titre</label>
+                            <input type="text" ngModel="{{editAnnonce?.titre}} " name="titre" class="form-control" id="titre" aria-describedby="emailHelp" placeholder="titre">
+                        </div>
+                        <input type="hidden" ngModel="{{editAnnonce?.id}} " name="id" class="form-control" id="id" placeholder="id ">
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="email " ngModel="{{editAnnonce?.description}}" name="description" class="form-control" id="description" placeholder="description">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="text" ngModel="{{editAnnonce?.phone}}" name="phone" class="form-control" id="phone" name="phone" placeholder="Phone">
+                        </div>
+                        <div class="form-group ">
+                            <label for="categorie">Categorie</label>
+                            <input type="text" ngModel="{{editAnnonce?.categorie}}" name="categorie" class="form-control " id="categorie" name="categorie" placeholder="categorie">
+                        </div>
+                        <div class="form-group ">
+                            <label for="adresse">Adresse</label>
+                            <input type="text" ngModel="{{editAnnonce?.adresse}}" name="adresse" class="form-control " id="adresse" name="adresse" placeholder="adresse">
+                        </div>
+                        <div class="form-group ">
+                            <label for="prix">Prix</label>
+                            <input type="number" ngModel="{{editAnnonce?.prix}}" name="prix" class="form-control" id="prix" placeholder="prix">
+                        </div>
+
+                        <!-- <div class="form-group ">
+                        <label for="date_ajout ">Date Ajout</label>
+                        <input type="hidden " ngModel="{{editAnnonce?.date_ajout}} " name="date_ajout " class="form-control " id="date_ajout " name="date_ajout " placeholder="date_ajout ">
+                    </div> -->
+                        <!-- <div class="form-group ">
+                        <label for="phone ">Image URL</label>
+                        <input type="text " ngModel="{{editAnnonce?.imageUrl}}" name="imageUrl " class="form-control " id="imageUrl " placeholder="Image URL ">
+                    </div> -->
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Photo</label> <br>
+                        <img height="50px" width="50px" src="data:image/png;base64,{{editAnnonce?.imageUrl}}" alt="">
+                        <input type="file" class="form-control-file" id="imageUrl" required name="imageUrl" #path="ngModel" ngModel (change)="selectImage($event)" />
+                        <div class="alert alert-danger" *ngIf="path.errors?.required && path.touched">
+                            Photo is required
+                        </div>
+                        <button mat-button (click)="onUpload(editAnnonce?.id)">changer photo</button>
+                    </div>
+                        <div class="modal-footer ">
+                            <button type="button" id="" data-dismiss="modal" class="btn btn-secondary ">Close</button>
+                            <button (click)="onUpdateAnnonce(editForm.value) " data-dismiss="modal " class="btn btn-primary ">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModelLabel">Delete Annonce</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete Annonce {{deleteAnnonce?.titre}}?</p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button (click)="onDeleteAnnonce(deleteAnnonce?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- details Modal -->
+    <div class="modal fade" id="detailsEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="detailsEditModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateEmployeeModalLabel"> Annonce {{detailAnnonce?.titre}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close ">
+         <span aria-hidden="true">&times;</span>
+         </button>
+                </div>
+                <div class="modal-body ">
+                    <form #editForm="ngForm">
+                        <div class="form-group ">
+                            <label for="titre">{{detailAnnonce?.titre}}</label>
+                        </div>
+                        <input type="hidden" ngModel="{{detailAnnonce?.id}} " name="id" class="form-control" id="id" placeholder="id ">
+                        <div class="form-group">
+                            <label for="description">{{detailAnnonce?.description}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">{{detailAnnonce?.phone}}</label>
+                        </div>
+                        <div class="form-group ">
+                            <label for="categorie">{{detailAnnonce?.categorie}}</label>
+                        </div>
+                        <div class="form-group ">
+                            <label for="prix ">{{detailAnnonce?.prix}} </label>
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="date_ajout ">Date Ajoute {{detailAnnonce?.date_ajout}}</label>
+                        </div>
+                        <div class="form-group ">
+                            <label for="phone ">Image URL <img src="data:image/png;base64,{{detailAnnonce?.imageUrl}}" height="100px" alt="{{detailAnnonce?.titre}}">
+                        </label>
+                        </div>
+                        <!-- <div class="form-group">
+                        <label for="exampleFormControlFile1">Photo</label> <br>
+                        <img height="50px" width="50px" src="data:image/png;base64,{{editAnnonce?.imageUrl}}" alt="">
+                        <input type="file" class="form-control-file" id="imageUrl" required name="imageUrl" #path="ngModel" ngModel (change)="selectImage($event)" />
+                        <div class="alert alert-danger" *ngIf="path.errors?.required && path.touched">
+                            Photo is required
+                        </div>
+                    </div> -->
+                        <div class="modal-footer ">
+                            <button type="button" id=" " data-dismiss="modal" class="btn btn-secondary ">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Notification for no Annoncesees -->
+<div *ngIf="annonces?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">NO ANNONCES!</h4>
+        <p>No ANNONCES were found.</p>
+    </div>
+</div>

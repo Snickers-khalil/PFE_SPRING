@@ -1,0 +1,286 @@
+<section class="breadcumb-area bg-img bg-overlay" style="background-image: url(assets/img/bg-img/pic4.jpg);">
+    <div class="">
+
+    </div>
+</section>
+
+
+<div class="container" *ngIf="showRandonneurBoard">
+    <div class="row">
+        <div class="col-12">
+            <div class="hero-slides-content text-center">
+                <a data-animation="fadeInUp" data-delay="500ms" class="btn oneMusic-btn mt-50" (click)="onOpenModal(null!, 'add')">Add Randonner <i class="fa fa-angle-double-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" id="main-container">
+    <div class="row">
+        <div class="col-12 section-heading style-2">
+            <br><br><br><br><br><br>
+            <h2>Randonner En Campingo</h2>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="row justify-content-center">
+                <mat-spinner *ngIf="!loading"></mat-spinner>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-9 ablums-text text-center mb-70">
+            <p></p>
+        </div>
+    </div>
+    <div class="row">
+        <div *ngFor="let randonner of randonners" class="col-md-4 col-xl-4">
+            <section class="events-area section-padding-100">
+                <div class="container">
+                    <div class="row">
+                        <!-- Single Event Area -->
+                        <div class="col-12 col-md-6 col-lg-4" >
+                            <div class="single-event-area mb-30">
+                                <div class="event-thumbnail"  (click)="onOpenModal(randonner, 'details')">
+                                    <img src="data:image/png;base64,{{randonner?.imageUrl}}" alt="" />
+                                    <!-- <mat-icon>favorite_border</mat-icon> -->
+                                    <span class="btn-icon btn-like btn-unliked icon-heart-check"></span>
+                                </div>
+                                <div class="event-text" >
+                                    <h4>{{randonner?.adress}}</h4>
+                                    <div class="event-meta-data" (click)="onOpenModal(randonner, 'details')">
+                                        <a  class="event-date">{{randonner?.date}}</a>
+                                    </div>
+                                    <div *ngIf="isLoggedIn">
+                                        <p class="tags"><a  (click)="onOpenModal(randonner, 'participe')" class="btn btn-success" >Participer</a></p>
+                                    </div>
+                                    <a (click)="onOpenModal(randonner, 'details')" class="btn see-more-btn">Voir Randonner</a>
+                                    <div class="float-right btn-group btn-group-sm">
+                                        <a *ngIf="showRandonneurBoard" (click)="onOpenModal(randonner, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                                        <a *ngIf="showRandonneurBoard" (click)="onOpenModal(randonner, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Add Employee Modal -->
+    <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addEmployeeModalLabel">Add Employee</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                     </button>
+                </div>
+                <div class="modal-body">
+                    <form #addForm="ngForm" (ngSubmit)="onAddRandonner(addForm)">
+                        <div class="form-group">
+                            <label for="adress" style="font-size: small;">Adresse</label>
+                            <input type="text" ngModel minlength="6" name="adress" class="form-control" id="adress" placeholder="adress" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="programme"style="font-size: small;">Programme</label>
+                            <input type="text" ngModel minlength="6" name="programme" class="form-control" id="programme" placeholder="programme" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cercuit"style="font-size: small;">Cercuit</label>
+                            <input type="text" ngModel minlength="4" name="cercuit" class="form-control" id="cercuit" placeholder="cercuit" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="defficulter"style="font-size: small;">Deficulter</label>
+                            <input type="text" ngModel minlength="4" name="difficult" class="form-control" id="difficult" placeholder="difficult" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="date"style="font-size: small;">Date</label>
+                            <input type="date" ngModel name="date" class="form-control" id="date" placeholder="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1"style="font-size: small;">Photo</label>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1" required name="path" #path="ngModel" ngModel (change)="selectImage($event)" />
+                            <div class="alert alert-danger" *ngIf="path.errors?.required && path.touched">
+                                Photo is required
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button [disabled]="addForm.invalid" type="submit " class="btn btn-primary ">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateEmployeeModalLabel"style="font-size: small;">Edit Randonner {{editRandonner?.adress}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+                </div>
+                <div class="modal-body">
+                    <form #editForm="ngForm">
+                        <div class="form-group ">
+                            <label for="title"style="font-size: small;">Adresse</label>
+                            <input type="text" ngModel="{{editRandonner?.adress}}" name="adress" class="form-control" id="adress" aria-describedby="emailHelp" placeholder="adresse">
+                        </div>
+                        <input type="hidden" ngModel="{{editRandonner?.id}}" name="id" class="form-control" id="id " placeholder="id ">
+                        <div class="form-group">
+                            <label for="description"style="font-size: small;">Programme</label>
+                            <input type="text" ngModel="{{editRandonner?.programme}}" name="programme" class="form-control" id="programme" placeholder="programme">
+                        </div>
+                        <div class="form-group">
+                            <label for="debut_event"style="font-size: small;">Cercuit</label>
+                            <input type="text" ngModel="{{editRandonner?.cercuit}}" name="cercuit" class="form-control" id="cercuit" name="cercuit" placeholder="cercuit">
+                        </div>
+                        <div class="form-group">
+                            <label for="debut_event"style="font-size: small;">Deficulter</label>
+                            <input type="text" ngModel="{{editRandonner?.difficult}}" name="difficult" class="form-control" id="cercuit" name="difficult" placeholder="cercuit">
+                        </div>
+                        <div class="form-group">
+                            <label for="fin_event"style="font-size: small;">Date </label>
+                            <input type="date" ngModel="{{editRandonner?.date}}" name="date" class="form-control" id="date" name="date" placeholder="date">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone"style="font-size: small;">Image</label>
+                            <img src="data:image/png;base64,{{editRandonner?.imageUrl}}" alt="" />
+                            <!-- <input type="text" ngModel="{{editRandonner?.imageUrl}} " name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL"> -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="" data-dismiss="modal " class="btn btn-secondary">Close</button>
+                            <button (click)="onUpdateRandonner(editForm.value)" data-dismiss="modal" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModelLabel">Delete Evennment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete Evennment {{deleteRandonner?.adress}}?</p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button (click)="onDeleteRandonner(deleteRandonner?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- participe Modal -->
+    <div class="modal fade" id="participeEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="participeModelLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="participeModelLabel">participate  Randonner</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want participate to {{participeRandonner?.adress}}?>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                            <button [disabled]="like"  (click)="onparticipeRandonner(participeRandonner?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- details Modal -->
+    <div class="modal fade" id="detailsEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="detailsEditModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateEmployeeModalLabel" style="font-size: small;">{{detailRandonner?.adress}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close ">
+             <span aria-hidden="true">&times;</span>
+             </button>
+                </div>
+                <div class="modal-body ">
+                    <form #editForm="ngForm">
+                        <!-- <div class="form-group "> -->
+                        <!-- <label for="titre">{{detailRandonner?.adress}}</label> -->
+                        <!-- <input type="text" ngModel="{{detailAnnonce?.titre}}" name="titre" class="form-control" id="titre " aria-describedby="emailHelp " placeholder="titre "> -->
+                        <!-- </div>https://goo.gl/maps/bFVhmurbaC3DUE3h9 -->
+                        
+                        <input type="hidden" ngModel="{{detailRandonner?.id}} " name="id" class="form-control" id="id" placeholder="id ">
+                        <div class="form-group">
+                            <label for="description"style="font-size:medium;">Programme :{{detailRandonner?.programme}}</label>
+                            <!-- <input type="email " ngModel="{{detailAnnonce?.description}}" name="description" class="form-control " id="description" placeholder="description "> -->
+                        </div><hr>
+                        <div class="form-group">
+                            <label for="phone"style="font-size:medium;">Cercuit :{{detailRandonner?.difficult}}</label>
+                            <!-- <input type="text" ngModel="{{detailAnnonce?.phone}}" name="phone " class="form-control" id="phone " name="phone" placeholder="Phone "> -->
+                        </div><hr>
+                        <!-- <div class="map-area mb-100">
+                            <iframe src="https://goo.gl/maps/bFVhmurbaC3DUE3h9" allowfullscreen></iframe>
+                        </div> 
+                        https://www.google.tn/maps/@36.979811,9.0597923,17z?hl=fr
+                    https://www.google.tn/maps/place/36%C2%B058'47.3%22N+9%C2%B003'43.1%22E/@36.979811,9.0597923,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x73267eb0c10c1397!8m2!3d36.979811!4d9.061981?hl=fr
+                    -->
+                        <div class="form-group">
+                            <!-- <iframe src="https://goo.gl/maps/bFVhmurbaC3DUE3h9" allowfullscreen></iframe> -->
+                            <!-- <iframe src="https://www.google.com/maps/place/36%C2%B059'00.5%22N+9%C2%B002'28.2%22E/@36.9834808,9.0411568,17z" allowfullscreen></iframe> -->
+                            <a href="https://goo.gl/maps/{{detailRandonner?.cercuit}}">
+                                <p>
+                                    click to see map
+                                </p>  
+                                <!-- <label for="categorie"style="font-size:medium;">Difficult :{{detailRandonner?.difficult}}</label> -->
+                            </a>
+                            <!-- <input type="text " ngModel="{{detailAnnonce?.categorie}} " name="categorie " class="form-control " id="categorie " name="categorie " placeholder="categorie "> -->
+                        </div><hr>
+                        <div class="form-group ">
+                            <label for="Date"style="font-size:medium;">Date :{{detailRandonner?.date}} </label>
+                            <!-- <input type="number " ngModel="{{detailAnnonce?.prix}} " name="prix " class="form-control " id="prix " placeholder="prix "> -->
+                        </div><hr>
+
+                        <div class="form-group">
+                            <label for="phone"style="font-size:medium;"> <img src="data:image/png;base64,{{detailRandonner?.imageUrl}}" height="100px" alt="{{detailRandonner?.adress}}">
+                            </label>
+                            <!-- <input type="text " ngModel="{{detailAnnonce?.imageUrl}}" name="imageUrl " class="form-control " id="imageUrl " placeholder="Image URL "> -->
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="exampleFormControlFile1">Photo</label> <br>
+                            <img height="50px" width="50px" src="data:image/png;base64,{{editAnnonce?.imageUrl}}" alt="">
+                            <input type="file" class="form-control-file" id="imageUrl" required name="imageUrl" #path="ngModel" ngModel (change)="selectImage($event)" />
+                            <div class="alert alert-danger" *ngIf="path.errors?.required && path.touched">
+                                Photo is required
+                            </div>
+                        </div> -->
+                        <div class="modal-footer ">
+                            <button type="button" id=" " data-dismiss="modal" class="btn btn-secondary ">Close</button>
+                            <!-- <button (click)="ongetAnnonce(detailAnnonce.id) " data-dismiss="modal " class="btn btn-primary ">Save changes</button> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- Notification for no randonner -->
+<div *ngIf="randonners?.length==0 " class="col-lg-12 col-md-12 col-xl-12 ">
+    <div class="alert alert-info " role="alert ">
+        <h4 class="alert-heading ">NO Randonner!</h4>
+        <p>No Randonner were found.</p>
+    </div>
+</div>

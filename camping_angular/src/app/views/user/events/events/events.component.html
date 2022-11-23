@@ -1,0 +1,267 @@
+<section class="breadcumb-area bg-img bg-overlay" style="background-image: url(assets/img/bg-img/pic3.jpg);">
+    <div class="">
+    </div>
+</section>
+<div class="container" *ngIf="showRandonneurBoard">
+    <div class="row">
+        <div class="col-12">
+            <div class="hero-slides-content text-center">
+               
+                <a data-animation="fadeInUp" data-delay="500ms" class="btn oneMusic-btn mt-50" (click)="onOpenModal(null!,'add')">Ajouter un événement <i class="fa fa-angle-double-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="main-container">
+    <div class="row">
+        <div class="col-12 section-heading style-2">
+            <h2> événement de Campingo </h2>
+        </div>
+    </div>
+   
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-9">
+            <!-- <div class="ablums-text text-center mb-70">
+                <p>Découvrez chaque jour un nouveau lieu et vivez une nouvelle aventure pleine d'émotions avec Campigo, il ne vous reste plus qu'à participer avec nous</p>
+            </div> -->
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="row justify-content-center">
+                <mat-spinner *ngIf="!loading"></mat-spinner>
+            </div>
+        </div>
+    </div>
+    <!-- Notification for no employees -->
+<div *ngIf="evenments.length==0 " class="col-lg-12 col-md-12 col-xl-12 ">
+    <div class="alert alert-info " role="alert ">
+        <h4 class="alert-heading ">Pas  d'événement !</h4>
+        <p>No Events were found.</p>
+    </div>
+</div>
+
+    <div class="row">
+        <div *ngFor="let evenment of evenments" class="col-md-4 col-xl-4">
+            <section class="events-area section-padding-100">
+                <div class="container">
+                    <div class="row">
+                        <!-- Single Event Area -->
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="single-event-area mb-30">
+                                <div class="event-thumbnail" (click)="onOpenModal(evenment, 'details')">
+                                    <img src="data:image/png;base64,{{evenment?.imageUrl}}" alt="" />
+                                    <!-- <mat-icon>favorite_border</mat-icon> -->
+                                    <span class="btn-icon btn-like btn-unliked icon-heart-check"></span>
+                                </div>
+                                <div class="event-text">
+                                    <h4>{{evenment?.title}}</h4>
+                                    <div class="event-meta-data"  (click)="onOpenModal(evenment, 'details')">
+
+                                        <a  class="event-date">{{evenment?.debut_event}}</a>
+                                        <a  class="event-date">{{evenment?.fin_event}}</a>
+                                    </div>
+                                    <div *ngIf="isLoggedIn">
+                                        <!-- <a (click)="onOpenModal(annonce, 'edit')" class="btn btn-success">Modifier</a> -->
+
+                                        <p class="tags"><a (click)="onOpenModal(evenment, 'participe')" class="btn btn-success">Participer</a></p>
+                                    </div>
+                                    <a (click)="onOpenModal(evenment, 'details')" class="btn see-more-btn">See Evenement</a>
+
+                                    <div class="float-right btn-group btn-group-sm">
+                                        <a *ngIf="showRandonneurBoard" (click)="onOpenModal(evenment, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                                        <a *ngIf="showRandonneurBoard" (click)="onOpenModal(evenment, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Add Employee Modal -->
+    <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addEmployeeModalLabel">Add Evenement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                     </button>
+                </div>
+                <div class="modal-body">
+                    <form #addForm="ngForm" (ngSubmit)="onAddEvenment(addForm)">
+                        <div class="form-group">
+                            <label for="titre"style="font-size: small;">Title</label>
+                            <input type="text" ngModel name="title" class="form-control" id="title" placeholder="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description"style="font-size: small;">Description</label>
+                            <input type="email" ngModel name="description" class="form-control" id="description" placeholder="description" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone"style="font-size: small;">event start date</label>
+                            <input type="date" ngModel name="debut_event" class="form-control" id="debut_event" placeholder="debut_event" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone"style="font-size: small;">event end date</label>
+                            <input type="date" ngModel name="fin_event" class="form-control" id="fin_event" placeholder="fin_event" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1"style="font-size: small;">Picture</label>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1" required name="path" #path="ngModel" ngModel (change)="selectImage($event)" />
+                            <div class="alert alert-danger" *ngIf="path.errors?.required && path.touched">
+                                Picture is required
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button [disabled]="addForm.invalid" type="submit " class="btn btn-primary ">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateEmployeeModalLabel">Edit Event {{editEvenment?.title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+                </div>
+                <div class="modal-body">
+                    <form #editForm="ngForm">
+                        <div class="form-group ">
+                            <label for="title"style="font-size: small;">Title</label>
+                            <input type="text" ngModel="{{editEvenment?.title}}" name="title" class="form-control" id="title" aria-describedby="emailHelp" placeholder="title">
+                        </div>
+                        <input type="hidden" ngModel="{{editEvenment?.id}}" name="id" class="form-control" id="id " placeholder="id ">
+                        <div class="form-group">
+                            <label for="description"style="font-size: small;">Description</label>
+                            <input type="text" ngModel="{{editEvenment?.description}}" name="description" class="form-control" id="description" placeholder="description">
+                        </div>
+                        <div class="form-group">
+                            <label for="debut_event"style="font-size: small;">event start date</label>
+                            <input type="date" ngModel="{{editEvenment?.debut_event}}" name="debut_event" class="form-control" id="debut_event" name="debut_event" placeholder="debut_event">
+                        </div>
+                        <div class="form-group">
+                            <label for="fin_event"style="font-size: small;">event end date</label>
+                            <input type="date" ngModel="{{editEvenment?.fin_event}}" name="fin_event" class="form-control" id="fin_event" name="fin_event" placeholder="fin_event">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone"style="font-size: small;">Picture</label>
+                            <img src="data:image/png;base64,{{editEvenment?.imageUrl}}" alt="" />
+                            <!-- <input type="text" ngModel="{{editEvenment?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL"> -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="" data-dismiss="modal " class="btn btn-secondary">Close</button>
+                            <button (click)="onUpdateEvenment(editForm.value)" data-dismiss="modal" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModelLabel">Delete Evennment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete Evennment {{deleteEvenment?.title}}? </p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button (click)="onDeleteEvennment(deleteEvenment?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- participe Modal -->
+    <div class="modal fade" id="participeEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="participeModelLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="participeModelLabel">participe Evenement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want participate  to {{participeEvenment?.title}} ?  </p>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                            <button [disabled]="like" (click)="onparticipeEvennment(participeEvenment?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- details Modal -->
+    <div class="modal fade" id="detailsEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="detailsEditModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateEmployeeModalLabel"style="font-size: small;">Randonner a {{detailEvenment?.title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close ">
+            
+             </button>
+                </div>
+                <div class="modal-body ">
+                    <form #editForm="ngForm"><hr>
+                        <div class="form-group ">
+                            <label for="title"style="font-size:medium;">Title :{{detailEvenment?.title}}</label>
+                            <!-- <input type="text" ngModel="{{detailAnnonce?.titre}}" name="titre" class="form-control" id="titre " aria-describedby="emailHelp " placeholder="titre "> -->
+                        </div><hr>
+                        <input type="hidden" ngModel="{{detailEvenment?.id}}" name="id" class="form-control" id="id" placeholder="id ">
+                        <div class="form-group">
+                            <label for="description"style="font-size:medium;">Description :{{detailEvenment?.description}}</label>
+                            <!-- <input type="email " ngModel="{{detailAnnonce?.description}}" name="description" class="form-control " id="description" placeholder="description "> -->
+                        </div><hr>
+                        <div class="form-group">
+                            <label for="debut_event"style="font-size:medium;">Start_event :{{detailEvenment?.debut_event}}</label>
+                            <!-- <input type="text" ngModel="{{detailAnnonce?.phone}}" name="phone " class="form-control" id="phone " name="phone" placeholder="Phone "> -->
+                        </div><hr>
+                        <div class="form-group ">
+                            <label for="fin_event"style="font-size:medium;">End_event :{{detailEvenment?.fin_event}}</label>
+                            <!-- <input type="text " ngModel="{{detailAnnonce?.categorie}} " name="categorie " class="form-control " id="categorie " name="categorie " placeholder="categorie "> -->
+                        </div><hr>
+
+                        <div class="form-group ">
+                            <label for="imageUrl"><img src="data:image/png;base64,{{detailEvenment?.imageUrl}}" height="100px" alt="{{detailEvenment?.title}}">
+                            </label>
+                            <!-- <input type="text " ngModel="{{detailAnnonce?.imageUrl}}" name="imageUrl " class="form-control " id="imageUrl " placeholder="Image URL "> -->
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="exampleFormControlFile1">Photo</label> <br>
+                            <img height="50px" width="50px" src="data:image/png;base64,{{editAnnonce?.imageUrl}}" alt="">
+                            <input type="file" class="form-control-file" id="imageUrl" required name="imageUrl" #path="ngModel" ngModel (change)="selectImage($event)" />
+                            <div class="alert alert-danger" *ngIf="path.errors?.required && path.touched">
+                                Photo is required
+                            </div>
+                        </div> -->
+                        <div class="modal-footer ">
+                            <button type="button" id=" " data-dismiss="modal" class="btn btn-secondary ">Close</button>
+                            <!-- <button (click)="ongetAnnonce(detailAnnonce.id) " data-dismiss="modal " class="btn btn-primary ">Save changes</button> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

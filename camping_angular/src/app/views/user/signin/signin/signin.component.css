@@ -1,0 +1,57 @@
+input:invalid {
+    box-shadow: 0 0 5px 1px rgb(224, 133, 133);
+  }
+  
+  input:focus:invalid {
+    outline: none;
+  }
+  /* :: 3.8.0 oneMusic Button */
+  input:valid {
+    box-shadow: 0 0 5px 1px rgb(108, 151, 115);
+  }
+  
+  input:focus:valid {
+    outline: none;
+  }
+.oneMusic-btn {
+    background-color: #fff;
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    min-width: 212px;
+    height: 49px;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 0;
+    padding: 0 30px;
+    font-size: 16px;
+    line-height: 47px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.oneMusic-btn i {
+    margin-left: 5px;
+}
+
+.oneMusic-btn:hover,
+.oneMusic-btn:focus {
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #000000;
+    color: #fff;
+}
+
+.oneMusic-btn.btn-2 {
+    background-color: #000000;
+    color: #fff;
+}
+
+.oneMusic-btn.btn-2:hover,
+.oneMusic-btn.btn-2:focus {
+    background-color: #fff;
+    color: #232323;
+}
+

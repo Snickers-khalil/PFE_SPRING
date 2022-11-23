@@ -1,0 +1,102 @@
+<section class="breadcumb-area bg-img bg-overlay" style="background-image: url(assets/img/bg-img/pic5.jpg);">
+    <div class="">
+
+    </div>
+</section>
+<div class="card-wrapper">
+    <div class="card">
+        <hr>
+        <hr>
+        <!-- card left -->
+        <div class="product-imgs">
+            <div class="img-display">
+                <div class="img-showcase">
+                    <img src="assets/img/bg-img/pic5.jpg" alt="shoe image">
+                    <img src="assets/img/bg-img/pic4.jpg" alt="shoe image">
+                    <img src="assets/img/bg-img/pic3.jpg" alt="shoe image">
+                    <img src="assets/img/bg-img/pic1.jpg" alt="shoe image">
+                </div>
+            </div>
+            <div class="img-select">
+                <div class="img-item">
+                    <a data-id="1">
+                        <img src="assets/img/bg-img/pic5.jpg" alt="shoe image">
+                    </a>
+                </div>
+                <div class="img-item">
+                    <a data-id="2">
+                        <img src="assets/img/bg-img/pic4.jpg" alt="shoe image">
+                    </a>
+                </div>
+                <div class="img-item">
+                    <a data-id="3">
+                        <img src="assets/img/bg-img/pic2.jpg" alt="shoe image">
+                    </a>
+                </div>
+                <div class="img-item">
+                    <a data-id="4">
+                        <img src="assets/img/bg-img/pic1.jpg" alt="shoe image">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- card right -->
+        <div class="product-content">
+            <br><br><br><br>
+            <h2 class="product-title">CAMPINGO SHOP</h2>
+            <br><br>
+            <a href="#" class="product-link">DATE ANNONCE</a>
+            <div class="product-rating">
+
+                <span>1 JENVIER 2022</span>
+            </div>
+
+            <div class="product-price">
+                <p class="dropdown-item-icon mdi-square-inc-cash text-primary me-2">PRIX: <span>$249.00 (5%)</span></p>
+                <hr>
+                <hr>
+                <p class="dropdown-item-icon mdi mdi-map-marker text-primary me-2">ADRESS: <span>BEJA</span></p>
+                <hr>
+                <hr>
+                <p class="dropdown-item-icon mdi mdi-phone text-primary me-2">PHONE: <span>94353760</span></p>
+            </div>
+            <br><br><br><br><br><br>
+            <div class="product-detail">
+                <h2>about this item: </h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis eius. Dignissimos, labore suscipit. Unde.</p>
+                <ul>
+                    <li>Color: <span>Black</span></li>
+                    <li>Available: <span>in stock</span></li>
+                    <li>Category: <span>Shoes</span></li>
+                    <li>Shipping Area: <span>All over the world</span></li>
+                    <li>Shipping Fee: <span>Free</span></li>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<script>
+    const imgs = document.querySelectorAll('.img-select a');
+    const imgBtns = [...imgs];
+    let imgId = 1;
+
+    imgBtns.forEach((imgItem) => {
+        imgItem.addEventListener('click', (event) => {
+            event.preventDefault();
+            imgId = imgItem.dataset.id;
+            slideImage();
+        });
+    });
+
+    function slideImage() {
+        const displayWidth = document.querySelector('.img-showcase img:first-child').clientWidth;
+
+        document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
+    }
+
+    window.addEventListener('resize', slideImage);
+</script>
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>

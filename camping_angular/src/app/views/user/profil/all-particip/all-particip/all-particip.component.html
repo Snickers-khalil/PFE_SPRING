@@ -1,0 +1,82 @@
+<!-- Begin Page Content -->
+<section class="breadcumb-area bg-img bg-overlay" style="background-image: url(assets/img/bg-img/amin.jpg);">
+    <div class="bradcumbContent">
+        <h2><strong><br><br></strong> All Participe </h2>
+    </div>
+</section>
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4" id="demoE">
+        <div class="card-header py-3">
+            <h4 class="m-0 font-weight-bold text-primary">All Participation Evennement</h4>
+            <!-- <button class=" mdi mdi-cloud-print btn btn-success" printSectionId="demo" ngxPrint>Imprimer</button> -->
+            <button type="button" printSectionId="demoE" ngxPrint class="btn btn-info btn-icon-text">
+                Print
+                <i class="ti-printer btn-icon-append"></i>                                                                              
+              </button>
+        </div>
+        <div class="container">
+            <div class="card-table">
+                <div class="cart-product">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Date Participation</th>
+                            <th>Utilisateur</th>
+                            <th>Evennment</th>
+                        </tr>
+                        <tbody>
+                            <tr *ngFor="let item of particip;index as i">
+                                <td style="font-size: small;"><span>{{item.date_particip|date:'yyyy'}}</span>/<span>{{item.date_particip|date:'MM'}}</span>/{{item.date_particip|date:'dd'}}</td>
+                                <td style="font-size: small;">{{item.utilisateur.firstname}} {{item.utilisateur.lastname}}</td>
+                                <td style="font-size: small;">{{item.evenment.title}}</td>
+                                <td>
+                                    <a (click)="Deleteparticip(item.id)" class="btn btn-danger tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4" id="demoR">
+        <div class="card-header py-3">
+            <h4 class="m-0 font-weight-bold text-primary">All Participation Randonner</h4>
+            <!-- <button class=" mdi mdi-cloud-print btn btn-success" printSectionId="demo" ngxPrint>Imprimer</button> -->
+            <button type="button" printSectionId="demoR" ngxPrint class="btn btn-info btn-icon-text">
+                Print
+                <i class="ti-printer btn-icon-append"></i>                                                                              
+              </button>
+        </div>
+        <div class="container">
+            <div class="card-table">
+                <div class="cart-product">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Date Participation</th>
+                            <th>Utilisateur</th>
+                            <th>Randonner</th>
+                        </tr>
+                        <tbody>
+                            <tr *ngFor="let item of partrand;index as i">
+                                <td style="font-size: small;"><span>{{item.date_particip|date:'yyyy'}}</span>/<span>{{item.date_particip|date:'MM'}}</span>/{{item.date_particip|date:'dd'}}</td>
+                                <td style="font-size: small;">{{item.utilisateur.firstname}} {{item.utilisateur.lastname}}</td>
+                                <td style="font-size: small;">{{item.randonner.programme}}</td>
+                                <td>
+                                    <a (click)="DeletepartRand(item.id)" class="btn btn-danger tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Begin Page Content -->

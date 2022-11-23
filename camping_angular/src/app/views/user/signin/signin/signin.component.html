@@ -1,0 +1,54 @@
+<!-- ##### Breadcumb Area Start ##### -->
+<section class="breadcumb-area bg-img bg-overlay" style="background-image: url(assets/img/bg-img/amin.jpg);">
+    <div class="bradcumbContent">
+        <h2 *ngIf="isLoggedIn">Welcome {{ username }}</h2>
+        <h2 *ngIf="!isLoggedIn">Login </h2>
+    </div>
+</section>
+<!-- ##### Breadcumb Area End ##### -->
+
+<!-- ##### Login Area Start ##### -->
+<section class="login-area section-padding-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="login-content">
+                    <h3></h3>
+                    <!-- Login Form -->
+                    <div class="alert alert-danger" *ngIf="errorMessage!=''">
+                        <strong>login ou mot de passe erronés..</strong>
+                    </div>
+                    <div class="login-form">
+                        <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" style="font-size: small;">Username</label>
+                                <input type="text" name="username" minlength="6" class="form-control" placeholder="Enter Username" [(ngModel)]="form.username" required username #username="ngModel">
+                            </div>
+                            <div class="alert alert-danger" role="alert" *ngIf="f.submitted && username.invalid">
+                                Username is required!
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1" style="font-size: small;">Password</label>
+                                <input type="password" minlength="6" name="password" class="form-control" placeholder="Password" [(ngModel)]="form.password" required password #password="ngModel">
+                            </div>
+                            <button type="submit" [disabled]="f.invalid"  class="btn oneMusic-btn mt-30">Login</button>
+                            <!-- <div class="form-group">
+                                <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+                                    Login failed : {{ errorMessage }}
+                                </div>
+                            </div> -->
+                        </form>
+                        <!-- <div class="alert alert-success" *ngIf="isLoggedIn">
+                            Logged in as {{ roles }}.
+                        </div> -->
+                        <br>
+                        <a data-animation="fadeInUp" data-delay="500ms" *ngIf="isLoggedIn" href="/" class="btn oneMusic-btn mt-50">Get Started<i class="fa fa-angle-double-right"></i></a>
+                        <a *ngIf="!isLoggedIn" routerLink="/register">Sign-up</a>
+                        <!-- <a *ngIf="isLoggedIn" style="font-size: x-large;" routerLink="/" class=" alert alert-success">Get Started</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Login Area End ##### -->

@@ -1,0 +1,13 @@
+.imgg {
+    width: 130px;
+    image-resolution: 80px 70px;
+    padding-left: 21px;
+}
+
+.uss {
+    text-transform: uppercase;
+}
+
+.espace {
+    padding-top: 28px;
+}

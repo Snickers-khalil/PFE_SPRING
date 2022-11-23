@@ -1,0 +1,110 @@
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+    <!-- Navbar Area -->
+    <div class="oneMusic-main-menu">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <!-- Menu -->
+                <nav class="classy-navbar justify-content-between" id="oneMusicNav">
+                    <!-- Nav brand -->
+                    <a href="" class="nav-brand"><img src="assets/img/bg-img/logo.gif" alt=""></a>
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+                    <!-- Menu -->
+                    <div class="classy-menu"  >
+                        <!-- Close Button -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul>
+                                <li><a href="">Accueil</a></li>
+                                <li><a href="randonner">Randonnée</a></li>
+                                <li><a href="events">Evénement</a></li>
+                                <li>
+                                    <a href="/shop">Shop</a>
+                                </li>
+                                <li><a href="/contacter">Contacter</a></li>
+
+                                <li class="nav-item" *ngIf="showAdminBoard">
+                                    <a class="nav-link" routerLink="/admin">Dashboard</a>
+                                </li>
+                            </ul>
+                            <!-- Login/Register & Cart Button -->
+                            <div class="login-register-cart-button d-flex align-items-center">
+                                <!-- Login/Register -->
+
+                                <li *ngIf="isLoggedIn" class="nav-item dropdown d-none d-lg-block user-dropdown">
+                                    <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img class="img-xs rounded-circle thumbnail-image" width="50%" height="50%" src="data:image/jpeg;base64,{{imageUrl}}" onerror="this.src='./assets/img/per.png'" alt="user"></a>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                                        <div class="dropdown-header text-center">
+                                            <img routerLink="/profil" class="img-xs rounded-circle thumbnail-image" src="data:image/png;base64,{{imageUrl}}" onerror="this.src='./assets/img/per.png'" alt="">
+                                            <h4 class="mb-1 mt-3 font-weight-semibold">{{username}}</h4>
+                                        </div>
+                                        <a class="dropdown-item" style="font-size: small;" *ngIf="isLoggedIn" routerLink="/profil"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> Mon Profile </a>
+                                        <a class="dropdown-item" style="font-size: small;" *ngIf="isLoggedIn" routerLink="/favoris"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Favoris</a>
+                                        <a class="dropdown-item" style="font-size: small;" *ngIf="isLoggedIn" routerLink="/mesannonce"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> Annonce</a>
+                                        <a class="dropdown-item" style="font-size: small;" (click)="logout()" *ngIf="isLoggedIn"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Déconnecté</a>
+                                    </div>
+                                </li>
+                                <!-- Cart Button -->
+
+                                <a style="color: antiquewhite; font-size: large;" routerLink="/login" id="loginBtn" *ngIf="!isLoggedIn">Login / Register</a>
+                            </div>
+                        </div>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="theme-setting-wrapper" (click)="opendiag()">
+    <div id="settings-trigger"><i class="ti-comment"></i></div>
+    <div id="theme-settings" class="settings-panel">
+    </div>
+</div>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/62a0e11b7b967b1179938b29/1g526ul9l';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+<!-- ##### Header Area End ##### -->
+<router-outlet>
+</router-outlet>
+<!-- ##### Footer Area Start ##### -->
+<footer class="footer-area ">
+    <div class="container ">
+        <div class="row d-flex flex-wrap align-items-center ">
+            <div class="col-12 col-md-6 ">
+                <a><img src="assets/img/bg-img/c13.png" alt=" "></a>
+            </div>
+            <div class="col-12 col-md-6 ">
+                <div class="footer-nav ">
+                    <ul>
+                        <li><a routerLink="">Accueil</a></li>
+                        <li><a href="randonner">Randonnée</a></li>
+                        <li><a href="events">Evénement</a></li>
+                        <li>
+                            <a href="/shop">Shop</a>
+                        </li>
+                        <li><a href="/contacter">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- ##### Footer Area Start ##### -->

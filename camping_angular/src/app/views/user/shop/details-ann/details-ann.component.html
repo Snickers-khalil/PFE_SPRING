@@ -1,0 +1,47 @@
+<div class="cancel-btn">
+    <strong><mat-icon mat-dialog-close color="warn">cancel</mat-icon></strong>
+</div>
+<div>
+    <div class="card-wrapper" *ngIf="annonce">
+        <div class="card">
+            <!-- card left -->
+            <div class="product-imgs">
+                <div class="img-display">
+                    <div class="img-showcase">
+                        <img src={{annonce.imageUrl}} alt="">
+                    </div>
+                </div>
+            </div>
+            <!-- card right -->
+            <div class="product-content">
+                <br><br><br><br>
+                <h2 class="product-title">CAMPINGO SHOP</h2>
+                <br><br>
+                <a href="#" class="product-link" style="font-size: small;">DATE ANNONCE</a>
+                <div class="product-rating">
+                    <span>{{annonce?.date_ajout}}</span>
+                </div>
+                <div class="product-price">
+                    <p class="dropdown-item-icon mdi-square-inc-cash text-primary me-2">PRIX: <span> {{annonce.prix}}$</span></p>
+
+                    <p class="dropdown-item-icon mdi mdi-map-marker text-primary me-2">ADRESS: <span>{{annonce.adresse}}</span></p>
+
+                    <p class="dropdown-item-icon mdi mdi-phone text-primary me-2">PHONE: <span>{{annonce.phone}}</span></p>
+                </div>
+                <br><br><br>
+                <div class="product-detail">
+                    <h2>about this item: </h2>
+                    {{annonce.description}}
+                    <ul>
+                        <li>Color: <span>Black</span></li>
+                        <li>Available: <span>in stock</span></li>
+                        <li>Category: <span>Shoes</span></li>
+                        <li>Shipping Area: <span>All over the world</span></li>
+                        <li>Shipping Fee: <span>Free</span></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

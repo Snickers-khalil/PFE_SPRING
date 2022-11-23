@@ -1,0 +1,193 @@
+<section class="breadcumb-area bg-img bg-overlay" style="background-image: url(assets/img/bg-img/amin.jpg);">
+  <div class="bradcumbContent">
+      <h2><strong><br><br></strong>Avis </h2>
+  </div>
+</section>
+<nav class="navbar navbar-expand-sm navbar-dark">
+  <a href="/profil">    <img href="/profil" src="data:image/png;base64,{{currentUser.imageUrl}}" onerror="this.src='./assets/img/per.png'" alt="" class="rounded-circle" width="40" height="40">
+  </a>
+  <h2>
+      <a class="navbar-brand ml-2" href="/profil" style="color: blue;" data-abc="true">{{currentUser.username}}</a>  
+</h2>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false"
+      aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+  <div class="end">
+  </div>
+</nav>
+<!-- Main Body -->
+<section>
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-5 col-md-6 col-12 pb-4">
+              <h1>Comments</h1>
+              <div *ngIf="msgs?.length==0 " class="col-lg-12 col-md-12 col-xl-12 ">
+                  <div class="alert alert-info" role="al.ert ">
+                             <h4 class="alert-heading">NO Comments!</h4>
+                                     <span style="font-size: large;">No Comments were found.</span>
+                                     </div>
+                                  </div>
+              <div class="darker mt-4 col-12  text-justify" *ngFor="let item of msgs;index as i">
+                  <div class="row">
+                      <div class="col">
+                          <img src="data:image/png;base64,{{item.utilisateur.imageUrl}}" onerror="this.src='./assets/img/per.png'" alt="" class="rounded-circle" width="50" height="40">
+                         <strong>
+                           {{item.utilisateur.firstname}} <span></span> {{item.utilisateur.lastname}}
+                         </strong> 
+                      </div>
+                      <div style="text-align: end;" class="col">
+                          {{item.date_post|date:'yyyy'}}/{{item.date_post|date:'MM'}}/{{item.date_post|date:'dd'}}
+                      </div>
+                  </div>
+                  <br>
+                  <p style="font-size: 20px;">{{item.contenu}}</p>
+                  <hr>
+               </div>
+          </div>
+          <div >
+              <form id="algin-form" #addForm="ngForm" (ngSubmit)="SendMssg(addForm)">
+                  <div class="form-group">
+                      <h5 style="font-size: large;">Leave a Comment</h5>
+                      <label style="font-size: large;" for="message"><h5>Say something about us</h5></label>
+                      <textarea style="font-size: large;color: rgb(44, 46, 48);" name="contenu" minlength="10" required ngModel name="contenu" class="form-control" id="contenu" cols="30" rows="10" placeholder="contenu Message"></textarea>
+                  </div>
+                  <div class="form-group"><button type="button" [disabled]="addForm.invalid" id="post" type="submit" class="btn">Post Comment</button></div>
+              </form>
+          </div>
+      </div>
+  </div>
+  
+</section>
+
+
+
+
+
+<!-- <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(assets/img/bg-img/amin.jpg);">
+    <div class="bradcumbContent">
+        <h2><strong><br><br></strong> Chat </h2>
+    </div>
+</section>
+
+
+
+
+<div class="container bootstrap snippets bootdeys">
+    <div class="col-md-7 col-xs-12 col-md-offset-2">
+      <div class="panel" id="chat">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <i class="icon wb-chat-text" aria-hidden="true"></i> 
+          </h3>
+          <div *ngIf="msgs?.length==0 " class="col-lg-12 col-md-12 col-xl-12 ">
+            <div class="alert alert-info" role="alert ">
+                       <h4 class="alert-heading">NO Comments!</h4>
+                               <span style="font-size: large;">No Comments were found.</span>
+                               </div>
+                            </div>
+        </div>
+        <div class="panel-body" *ngFor="let item of msgs;index as i">
+          <div class="chats">
+            <div class="chat chat-left">
+              <div class="chat-avatar">
+                <a class="avatar avatar-online" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edward Fletcher">
+                    <img src="data:image/png;base64,{{item.utilisateur.imageUrl}}" onerror="this.src='./assets/img/per.png'" alt="" class="rounded-circle" width="40" height="40">
+                    <i></i>
+                </a>
+              </div>
+              <div class="chat-body">
+                <div class="chat-content">
+                  <p style="font-size: large;">{{item.contenu}}.</p>
+                  <time class="chat-time" datetime="2015-07-01T11:39">                        
+                 {{item.date_post|date:'yyyy'}}/{{item.date_post|date:'MM'}}/{{item.date_post|date:'dd'}}
+                </time>
+                </div>
+              </div>
+            </div>
+            <div class="chat">
+              <div class="chat-avatar">
+                <a class="avatar avatar-online" data-toggle="tooltip"  data-placement="right" title="" data-original-title="June Lane">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="...">
+                  <i></i>
+                </a>
+              </div>
+              <div class="chat-body">
+                <div class="chat-content">
+                  <p>
+                    If necessary, please ask me.
+                  </p>
+                  <time class="chat-time" datetime="2015-07-01T11:40">11:40:10 am</time>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <form  #addForm="ngForm" (ngSubmit)="SendMssg(addForm)">
+            <div class="input-group">
+                <textarea style="font-size: large;color: aliceblue;" name="contenu" minlength="10" required ngModel name="contenu" class="form-control" id="contenu" cols="30" rows="10" placeholder="contenu Message"></textarea>
+                <span class="input-group-btn">
+                <button class="btn btn-primary"  [disabled]="addForm.invalid" id="post" type="submit" type="button">Send</button>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div> -->
+
+
+
+<!-- 
+<nav class="navbar navbar-expand-sm navbar-dark">
+    <a href="/profil">    <img href="/profil" src="data:image/png;base64,{{currentUser.imageUrl}}" onerror="this.src='./assets/img/per.png'" alt="" class="rounded-circle" width="40" height="40">
+    </a>
+    <h2>
+        <a class="navbar-brand ml-2" href="/profil" style="color: blue;" data-abc="true">{{currentUser.username}}</a>  
+</h2>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false"
+        aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="end">
+    </div>
+</nav>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5 col-md-6 col-12 pb-4">
+                <h1>Comments</h1>
+                <div *ngIf="msgs?.length==0 " class="col-lg-12 col-md-12 col-xl-12 ">
+                    <div class="alert alert-info" role="alert ">
+                               <h4 class="alert-heading">NO Comments!</h4>
+                                       <span style="font-size: large;">No Comments were found.</span>
+                                       </div>
+                                    </div>
+                <div class="darker mt-4 col-12  text-justify" *ngFor="let item of msgs;index as i">
+                    <div class="row">
+                        <div class="col">
+                            <img src="data:image/png;base64,{{item.utilisateur.imageUrl}}" onerror="this.src='./assets/img/per.png'" alt="" class="rounded-circle" width="40" height="40">
+                            <h4>{{item.utilisateur.firstname}} <span></span> {{item.utilisateur.lastname}}</h4>
+                        </div>
+                        <div style="text-align: end;" class="col">
+                            {{item.date_post|date:'yyyy'}}/{{item.date_post|date:'MM'}}/{{item.date_post|date:'dd'}}
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+                    <p style="font-size: 20px;">{{item.contenu}}</p>
+                    
+                 </div>
+            </div>
+            <div class="">
+                <form id="algin-form" #addForm="ngForm" (ngSubmit)="SendMssg(addForm)">
+                    <div class="form-group">
+                        <h5 style="font-size: large;">Leave a Comment</h5>
+                        <label style="font-size: large;" for="message"><h5>Comment</h5></label>
+                        <textarea style="font-size: large;color: aliceblue;" name="contenu" minlength="10" required ngModel name="contenu" class="form-control" id="contenu" cols="30" rows="10" placeholder="contenu Message"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" [disabled]="addForm.invalid" id="post" type="submit" class="btn">Post Comment</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</section> -->

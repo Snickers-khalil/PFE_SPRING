@@ -1,0 +1,42 @@
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4" id="demoD">
+        <div class="card-header py-3">
+            <h4 class="m-0 font-weight-bold text-primary">All demandes</h4>
+            <!-- <button class=" mdi mdi-cloud-print btn btn-success" printSectionId="demo" ngxPrint>Imprimer</button> -->
+            <button type="button" printSectionId="demoD" ngxPrint class="btn btn-info btn-icon-text">
+                Print
+                <i class="ti-printer btn-icon-append"></i>                                                                              
+              </button>
+        </div>
+        <div class="container">
+            <div class="card-table">
+                <div class="cart-product">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>                          
+                                <th>Date Demande</th>
+                                <th>Utilisateur</th>
+                                <th>Choix</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of demandes;index as i">
+                                <td style="font-size: small;">{{item.date_demande}}</td>
+                                <td style="font-size: small;">{{item.utilisateur.firstname}} {{item.utilisateur.lastname}}</td>
+                                <td>
+                                    <button (click)="changetorand(item.utilisateur.id)" class="btn btn-success" data-dismiss="modal">Accepter</button>
+                                    <button (click)="refuserDemande(item.id)" class="btn btn-danger" data-dismiss="modal">Refuser</button>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

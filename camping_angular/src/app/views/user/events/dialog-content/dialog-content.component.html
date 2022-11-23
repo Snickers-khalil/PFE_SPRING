@@ -1,0 +1,29 @@
+<div class="blog-area section-padding-100" *ngFor="let evenment of evenment; let i = index" [class.active]="i == currentIndex" (click)="setActiveTutorial(evenment, i)">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12 col-lg-9">
+                <!-- Single Post Start -->
+                <div class="single-blog-post ">
+                    <div class="blog-post-thumb mt-30">
+                        <a><img src="{{evenment.imageUrl}}" alt=""></a>
+                        <!-- Post Date -->
+
+                    </div>
+                    <!-- Blog Content -->
+                    <div class="blog-content">
+                        <!-- Post Title -->
+
+                        <!-- Post Meta -->
+                        <div class="post-meta d-flex mb-30">
+                            <p class="post-author">By<a> {{evenment.description}}</a></p>
+                            <p class="tags">in<a href="#"> {{evenment.debut_event}}</a></p>
+                            <p class="tags">in<a href="#"> {{evenment.fin_event}}</a></p>
+                        </div>
+                        <!-- Post Excerpt -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+input:invalid {
+    box-shadow: 0 0 5px 1px rgb(224, 133, 133);
+  }
+  
+  input:focus:invalid {
+    outline: none;
+  }
+  input:valid {
+    box-shadow: 0 0 5px 1px rgb(108, 151, 115);
+  }
+  
+  input:focus:valid {
+    outline: none;
+  }

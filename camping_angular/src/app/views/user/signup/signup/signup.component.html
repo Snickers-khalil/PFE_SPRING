@@ -1,0 +1,78 @@
+<!-- ##### Breadcumb Area Start ##### -->
+<section class="breadcumb-area bg-img bg-overlay" style="background-image: url(assets/img/bg-img/amin.jpg);">
+    <div class="bradcumbContent">
+        <h2>Register</h2>
+    </div>
+</section>
+<!--Breadcumb Area End-->
+
+<!-- ##### Login Area Start ##### -->
+<section class="login-area section-padding-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="login-content">
+                    <h3>Welcome</h3>
+                    <!-- Login Form -->
+                    <!-- <div class="alert alert-danger" *ngIf="errorMessage!=''">
+                        <strong>login ou mot de passe erronés..</strong>
+                    </div> -->
+                    <div class="login-form">
+                        <form *ngIf="!isSuccessful" name="form"  (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                            <div class="form-group">
+                                <label style="font-size: small;">first name</label>
+                                <input  type="text" name="firstname" minlength="3" maxlength="20" class="form-control" placeholder="Enter firstName" [(ngModel)]="form.firstname" required firstname #firstname="ngModel">
+                            </div>
+                            <div class="form-group">
+                                <label style="font-size: small;">last name</label>
+                                <input type="text" class="form-control" minlength="4" maxlength="20" name="lastname" placeholder="Enter LastName " [(ngModel)]="form.lastname" required lastname #lastname="ngModel">
+                            </div>
+                            <div class="form-group">
+                                <label style="font-size: small;">Username</label>
+                                <input type="text" minlength="6" maxlength="20" class="form-control" name="username" placeholder="Enter Username 6 caracter required " [(ngModel)]="form.username" required username #username="ngModel">
+                                <div style="font-size: medium;" class="alert alert-warning" role="alert" *ngIf="f.submitted && username.invalid">
+                                    Username is invalid 6 caracters required!
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label style="font-size: small;">Email address</label>
+                                <input type="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" class="form-control" name="email" placeholder=" Enter E-mail " [(ngModel)]="form.email " required email #email="ngModel">
+                                <div style="font-size: medium;" class="alert alert-warning" role="alert" *ngIf="f.submitted && email.invalid">
+                                    email is invalid!
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label style="font-size: small;">Password</label>
+                                <input type="password" minlength="6" class="form-control" name="password" placeholder="Password 6 caracte min" [(ngModel)]="form.password" required password #password="ngModel">
+                                <div style="font-size: medium;" class="alert alert-warning" role="alert" *ngIf="f.submitted && password.invalid">
+                                    password is invalid!
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label style="font-size: small;">phone</label>
+                                <input type="tel" class="form-control" minlength="8" maxlength="8" name="phone" placeholder="Enter Phone" [(ngModel)]="form.phone" required phone #phone="ngModel">
+                            </div>
+                            <div class="form-group ">
+                                <label style="font-size: small;">City</label>
+                                <input type="text" minlength="4" class="form-control" name="city" placeholder="Enter City" [(ngModel)]="form.city" required city #city="ngModel">
+                            </div>
+                            <!-- <div class="form-group">
+                                <label>imageUrl</label>
+                                <img type="hidden" class="form-control" src="assets\img\bg-img\e6.jpg" name="imageUrl" [(ngModel)]="form.imageUrl " required imageUrl #imageUrl="ngModel">
+                            </div> -->
+                            <button type="submit" [disabled]="f.invalid" class="btn oneMusic-btn mt-30 ">Register</button>
+                            <div class="alert alert-warning " *ngIf="f.submitted && isSignUpFailed ">
+                                Signup failed!<br />{{ errorMessage }}
+                            </div>
+                        </form>
+                        <div class="alert alert-success " *ngIf="isSuccessful ">
+                            Your registration is successful!
+                        </div><br>
+                        <a  routerLink="/login">Sign-in</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Login Area End ##### -->

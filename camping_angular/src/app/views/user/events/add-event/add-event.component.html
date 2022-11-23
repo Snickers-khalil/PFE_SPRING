@@ -1,0 +1,62 @@
+<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+  </button>
+  <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup" *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <ng-template matStepLabel>Fill out your name</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required [(ngModel)]="form.title" >
+        </mat-form-field>
+        <br>
+        <br>
+        
+        <mat-form-field class="example-full-width" appearance="fill" >
+            <mat-label>Description</mat-label>
+            <input matInput placeholder="about event" formControlName="firstCtrl" required [(ngModel)]="form.description" >
+            
+          </mat-form-field>
+          <br>
+          <br>
+          <mat-form-field appearance="fill" type="date">
+            <mat-label>Enter a date event</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input  name="debut_event" id="debut_event" matStartDate placeholder="Start date"  [(ngModel)]="form.debut_event" >
+              <input  name="fin_event" id="fin_event"matEndDate placeholder="End date"  [(ngModel)]="form.fin_event" >
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Next</button>
+        </div>
+         
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+      <form [formGroup]="secondFormGroup">
+        <div class="event-thumbnail">
+          <img [src]="imgURL" alt="">
+      </div>            
+        <input class="file btn " type="file" name="file" (change)="onFileChanged($event)"/>
+        <input type="button" (click)="onUpload()" value="upload">
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button type="submit " >ADD</button>
+
+      </div>
+    </mat-step>
+  </mat-stepper> -->

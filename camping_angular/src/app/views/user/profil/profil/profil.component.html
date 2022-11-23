@@ -1,0 +1,209 @@
+<section class="breadcumb-area bg-img bg-overlay" style="background-image: url(assets/img/bg-img/pexx3.jpg);">
+    <div class="bradcumbContent">
+        <h2><strong>{{ currentUser.username }}<br><br></strong> Profile </h2>
+    </div>
+</section>
+
+<div class="container">
+    <div class="main-body">
+
+        <!-- Breadcrumb -->
+
+        <!-- /Breadcrumb -->
+        <br><br><br>
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+
+                            <img src="data:image/png;base64,{{currentUser.imageUrl}}" alt="Admin" class="rounded-circle thumbnail-image" onerror="this.src='./assets/img/per.png'" width="150ms" height="200ms">
+                            <button *ngIf="isSelected" mat-button (click)="onUpload(currentUser?.id)" >Update photo </button>
+                            <div class="form-group">
+                                <!-- <label for="exampleFormControlFile1">Photo</label> -->
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1" required name="path" #path="ngModel" ngModel (change)="selectImage($event)" />
+                                <div class="alert alert-danger" *ngIf="select">
+                                    Photo is required
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <h4> {{ currentUser.username }}</h4>
+                                <p class="text-secondary mb-1">Role</p>
+                                <h4 class="text-muted font-size-sm"> {{ currentUser.roles }}</h4>
+                            </div>
+                            <div class="mt-3" *ngIf="!showAdminBoard">
+                                <a *ngIf="!showRandonneurBoard" (click)="onOpenModal(currentUser, 'role')" class="text-secondary mb-1">change role</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <div class="card">
+                        <div class="card-body" >
+                            <div class="d-flex flex-column align-items-center text-center" style="background-color: 1a202c; padding: 2rem">
+                                <div class="row" >
+                                    <button type="button" style="color: black;" class="btn btn-outline-light" routerLink="/mesannonce">ANNONCE</button>
+                                    <button type="button" style="color: black;" class="btn btn-outline-light" routerLink="/favoris">FAVORIS</button>
+                                    
+                                    <button type="button" style="color: black;" class="btn btn-outline-light" routerLink="/particip_event">EVENTS</button>
+                                    
+                                    <button type="button" style="color: black;" class="btn btn-outline-light" routerLink="/particip_rand">RANDONNER</button>
+                                    
+                                    <button type="button" style="color: black;" class="btn btn-outline-light" *ngIf="showRandonneurBoard" routerLink="/allpart">Participation</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">
+                                    <th>First Name</th>
+                                </h6>
+                            </div>
+                            <div class="col-sm-9 ">
+                                {{ currentUser.firstname }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">
+                                    <th>Last Name</th>
+                                </h6>
+                            </div>
+                            <div class="col-sm-9 ">
+                                {{ currentUser.lastname }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">
+                                    <th>Email</th>
+                                </h6>
+                            </div>
+                            <div class="col-sm-9 ">
+                                {{ currentUser.email }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">
+                                    <th>Phone</th>
+                                </h6>
+                            </div>
+                            <div class="col-sm-9 ">
+                                {{ currentUser.phone }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">
+                                    <th>Address</th>
+                                </h6>
+                            </div>
+                            <div class="col-sm-9 ">
+                                {{ currentUser.city }}
+                            </div>
+                        </div>
+                        <hr>
+                        <a (click)="onOpenModal(currentUser, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                    </div>
+                    <!-- <div class="alert alert-success" *ngIf="isSend">
+                        <p>Demande envoyer avec Succes ..!</p>
+                    </div>
+                    <div class="alert alert-success" *ngIf="isChanger">
+                        <p>Photo Changer avec Succes ..!</p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" id="main-container">
+    <!-- Edit Modal -->
+    <div class="modal fade" id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateEmployeeModalLabel">Edit Profil {{editAnnonce?.username}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close ">
+         <span aria-hidden="true">&times;</span>
+         </button>
+                </div>
+                <div class="modal-body">
+                    <form #editForm="ngForm">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" ngModel="{{editAnnonce?.username}}" name="username" class="form-control" id="username" aria-describedby="emailHelp" placeholder="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname">Firstname</label>
+                            <input type="text" ngModel="{{editAnnonce?.firstname}}" name="firstname" class="form-control" id="firstname" aria-describedby="emailHelp" placeholder="firstname">
+                        </div>
+                        <input type="hidden" ngModel="{{editAnnonce?.id}} " name="id" class="form-control" id="id" placeholder="id">
+                        <div class="form-group">
+                            <label for="lastname">Lastname</label>
+                            <input type="text" ngModel="{{editAnnonce?.lastname}}" name="lastname" class="form-control" id="lastname" placeholder="lastname ">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="text" ngModel="{{editAnnonce?.phone}}" name="phone" class="form-control" id="phone" name="phone" placeholder="Phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="city">Adresse</label>
+                            <input type="text" ngModel="{{editAnnonce?.city}}" name="city" class="form-control " id="city" name="city" placeholder="city">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">email</label>
+                            <input type="text" ngModel="{{editAnnonce?.email}}" name="email" class="form-control" id="email" placeholder="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" ngModel="{{editAnnonce?.password}}" name="password" class="form-control" id="password" placeholder="password">
+                        </div>
+
+                        <div class="modal-footer ">
+                            <button type="button" id="" data-dismiss="modal" class="btn btn-secondary ">Close</button>
+                            <button (click)="onUpdateprofil(editForm.value) " data-dismiss="modal " class="btn btn-primary ">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- role Modal -->
+    <div class="modal fade" id="roleEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="participeModelLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="participeModelLabel"> changer Role</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         </button>
+                </div>
+                <div class="modal-body">
+                    <!-- <button (click)="getuserrole(roleuser.id)" class="btn btn-danger" data-dismiss="modal">role</button> -->
+                    <h3><span style="color:steelblue;">Je vouler etre un randonneur</span>..</h3>
+                    <div class="modal-footer">
+                        <!-- (click)="changetoadmin(roleuser.id)" -->
+                        <!--(click)="changetorand(roleuser.id)"   -->
+                        <!-- (click)="changetouser(roleuser.id)" -->
+                        <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <button (click)="ChangerRole(currentUser?.id)" [disabled]="envoyer" class="btn btn-success" data-dismiss="modal">Randonneur </button>
+                        <!-- <div class="alert alert-danger" *ngIf="envoyer">
+                            <p>Demande est encoure ...</p>
+                        </div> -->
+                        <!-- <button class="btn btn-success" data-dismiss="modal">User </button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

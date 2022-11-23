@@ -1,0 +1,119 @@
+ <!-- Preloader -->
+ <!-- <div class="preloader d-flex align-items-center justify-content-center">
+    <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div> -->
+<!-- ##### Hero Area Start ##### -->
+<section class="hero-area">
+    <div class="hero-slides ">
+        <!-- Single Hero Slide -->
+        <div data-delay="1s" data-bs-ride="carousel" class="carousel slide carousel-fade single-hero-slide d-flex align-items-center justify-content-center">
+            <!-- Slide Img --> 
+            <!-- <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel"> -->
+            <!-- <div class="carousel-inner"> carousel-item active -->
+            <div class="slide-img bg-img carousel-item " style="background-image: url(assets/img/bg-img/pex.jpg);"></div>
+            <div class="slide-img bg-img carousel-item" style="background-image: url(assets/img/bg-img/pic5.jpg);"></div>
+            <div class="slide-img bg-img carousel-item" style="background-image: url(assets/img/bg-img/pexx.jpg);"></div>
+            <div class="slide-img bg-img carousel-item active" style="background-image: url(assets/img/bg-img/pexx2.jpg);"></div>
+            <div class="slide-img bg-img carousel-item" style="background-image: url(assets/img/bg-img/pexx3.jpg);"></div>
+            <div class="slide-img bg-img carousel-item" style="background-image: url(assets/img/bg-img/pic3.jpg);"></div>
+            <!-- Slide Content -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="hero-slides-content text-center">
+                            <h6 data-animation="fadeInUp" data-delay="100ms" >WELCOME TO </h6>
+                            <h2 data-animation="fadeInUp" data-delay="300ms">CAMPINGO <span>ENJOY</span></h2>
+                            <a data-animation="fadeInUp" data-delay="500ms" href="events" class="btn oneMusic-btn mt-50">Discover <i class="fa fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Hero Area End ##### -->
+
+<!-- ##### Latest Albums Area Start ##### -->
+<section class="latest-albums-area section-padding-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading style-2">
+                    <p class="an-2">𝙽𝚘 𝚒𝚗𝚝𝚎𝚛𝚗𝚎𝚝 , 𝙽𝚘 𝚜𝚘𝚌𝚒𝚊𝚕 𝚖𝚎𝚍𝚒𝚊 . 𝚕𝚎𝚝𝚜 𝚐𝚘 𝚏𝚘𝚛 𝚊 𝚠𝚒𝚕𝚍  𝚌𝚊𝚖𝚙𝚒𝚗𝚐 𝚏𝚘𝚛 𝚜𝚘𝚖𝚎 𝚍𝚊𝚢𝚜 🍁</p>
+                   <a href="/randonner">
+                      <h2 class="c2"> 
+                        <span class="word" style="font-family: 'Cambria Math';">choose your </span><br>
+                        <span class="word" style="font-family: 'Cambria Math';">Destiny</span> 
+                    </h2> 
+                   </a>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-12">
+                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-delay="10ms">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <a href="#"><img src="assets/img/bg-img/pic1.jpg" alt=""></a>
+                        </div>
+                        <div class="carousel-item ">
+                            <a href="#"><img src="assets/img/bg-img/pic2.jpg" alt=""></a>
+                        </div>
+                        <div class="carousel-item ">
+                            <a href="#"><img src="assets/img/bg-img/pic3.jpg" alt=""></a>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                </div>
+
+            </div>
+        </div>      -->
+        <div class="video-player-wrapper">
+            <!-- <h2>Angular Video Player with Controls Example</h2> -->
+            <vg-player>
+              <vg-overlay-play></vg-overlay-play>
+              <vg-buffering></vg-buffering>
+              <vg-scrub-bar>
+                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+              </vg-scrub-bar>
+              <vg-controls>
+                <vg-play-pause></vg-play-pause>
+                <vg-playback-button></vg-playback-button>
+                <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+                <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+                <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+                <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+                <vg-track-selector></vg-track-selector>
+                <vg-mute></vg-mute>
+                <vg-volume></vg-volume>
+                <vg-fullscreen></vg-fullscreen>
+              </vg-controls> 
+              <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" crossorigin width="100%" height="100%">
+                <source src="assets/img/bg-img/Tunisia.mp4" type="video/mp4">
+                <source src="assets/img/bg-img/Tunisia.mp4" type="video/ogg">
+                <source src="assets/img/bg-img/Tunisia.mp4" type="video/webm">
+                <track kind="subtitles" label="English" src="assets/img/bg-img/tn.mp4"
+                  srclang="en" default>
+                <track kind="subtitles" label="Español" src="assets/img/bg-img/tn.mp4"
+                  srclang="es">
+              </video>
+            </vg-player>
+          </div>      
+                
+    </div>
+</section>
+<!-- ##### Latest Albums Area End ##### -->

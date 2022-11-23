@@ -1,0 +1,15 @@
+mat-form-field {
+    width: 100%;
+}
+
+mat-radio-button {
+    margin-left: 60px;
+}
+
+.bbtn {
+    text-align: center;
+}
+
+.cancel-btn {
+    text-align: right;
+}
